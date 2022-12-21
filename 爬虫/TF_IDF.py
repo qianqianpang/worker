@@ -1,6 +1,5 @@
 import os
 import re
-
 import jieba
 import jieba.analyse
 from sklearn.feature_extraction.text import CountVectorizer
