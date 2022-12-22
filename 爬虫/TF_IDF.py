@@ -1,6 +1,5 @@
 import os
 import re
-
 import jieba
 import jieba.analyse
 from sklearn.feature_extraction.text import CountVectorizer
@@ -61,4 +60,4 @@ def tf_idf():
 
 
 def main():
-    tf_idf()
+    return tf_idf()
