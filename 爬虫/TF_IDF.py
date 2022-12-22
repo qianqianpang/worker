@@ -60,4 +60,4 @@ def tf_idf():
 
 
 def main():
-    tf_idf()
+    return tf_idf()
