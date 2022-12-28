@@ -1,7 +1,9 @@
 import os
 import re
+
 import jieba
 import jieba.analyse
+import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
@@ -29,17 +31,25 @@ def word_segment(file_path):
             if word not in stopwords:
                 final_word.append(word)
         words_list.append(final_word)
-    return words_list
+    return words_list[0]
+
+
+def pin_jie(word_list):
+    word_str = ''
+    for word in word_list:
+        word_str += word
+        word_str += " "
+    return word_str
 
 
 def tf_idf():
-    source_data_path = os.path.join(father_path, "news_data")
+    source_data_path = os.path.join(father_path, "test_data")
     files = os.listdir(source_data_path)
     corpus = []
     for file in files:
         file_path = os.path.join(source_data_path, file)
-        corpus.append(word_segment(file_path))
-
+        corpus.append(pin_jie(word_segment(file_path)))
+    print(1)
     # 将文本中的词语转换为词`频矩阵 矩阵元素a[i][j] 表示j词在i类文本下的词频
     vectorizer = CountVectorizer()
 
@@ -53,7 +63,8 @@ def tf_idf():
     word = vectorizer.get_feature_names_out()
 
     # 将tf-idf矩阵抽取出来，元素w[i][j]表示j词在i类文本中的tf-idf权重
-    weight = tfidf.toarray()
+    w = tfidf.toarray()
+    weight = w.astype('float32')
 
     print(weight)
     return weight

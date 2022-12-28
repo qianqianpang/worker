@@ -4,7 +4,7 @@ import pandas as pd
 if __name__ == '__main__':
     current_path = os.path.abspath(__file__)
     father_path = os.path.abspath(os.path.dirname(current_path) + os.path.sep + ".")
-    source_data_path = os.path.join(father_path, "news_data")
+    source_data_path = os.path.join(father_path, "test_data")
 
     file_list = []
     title_list = []
