@@ -1,9 +1,11 @@
+import json
 import os
 import re
 
 import jieba
 import jieba.analyse
 import numpy as np
+import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 
@@ -43,13 +45,12 @@ def pin_jie(word_list):
 
 
 def tf_idf():
-    source_data_path = os.path.join(father_path, "test_data")
+    source_data_path = os.path.join(father_path, "news_data")
     files = os.listdir(source_data_path)
     corpus = []
     for file in files:
         file_path = os.path.join(source_data_path, file)
         corpus.append(pin_jie(word_segment(file_path)))
-    print(1)
     # 将文本中的词语转换为词`频矩阵 矩阵元素a[i][j] 表示j词在i类文本下的词频
     vectorizer = CountVectorizer()
 
@@ -61,12 +62,13 @@ def tf_idf():
 
     # 获取词袋模型中的所有词语
     word = vectorizer.get_feature_names_out()
-
+    dataframe = pd.DataFrame({'word': word})
+    dataframe.to_csv("word.csv", index=False, sep=',')
     # 将tf-idf矩阵抽取出来，元素w[i][j]表示j词在i类文本中的tf-idf权重
     w = tfidf.toarray()
     weight = w.astype('float32')
-
-    print(weight)
+    dataframe = pd.DataFrame({'weight': weight})
+    dataframe.to_csv("weight.csv", index=False, sep=',')
     return weight
 
 
