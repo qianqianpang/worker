@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\爬虫\result\test.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\爬虫\result\weight.csv">
           <value>
             <Attribute>
@@ -18,13 +25,6 @@
           </value>
         </entry>
         <entry key="\爬虫\result\word.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="\爬虫\test.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -1,10 +1,7 @@
-import json
 import os
 import re
-
 import jieba
 import jieba.analyse
-import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -62,13 +59,13 @@ def tf_idf():
 
     # 获取词袋模型中的所有词语
     word = vectorizer.get_feature_names_out()
-    dataframe = pd.DataFrame({'word': word})
-    dataframe.to_csv("word.csv", index=False, sep=',')
+    # dataframe = pd.DataFrame({'word': word})
+    # dataframe.to_csv("word.csv", index=False, sep=',')
     # 将tf-idf矩阵抽取出来，元素w[i][j]表示j词在i类文本中的tf-idf权重
     w = tfidf.toarray()
     weight = w.astype('float32')
-    dataframe = pd.DataFrame({'weight': weight})
-    dataframe.to_csv("weight.csv", index=False, sep=',')
+    # dataframe = pd.DataFrame({'weight': weight})
+    # dataframe.to_csv("weight.csv", index=False, sep=',')
     return weight
 
 
