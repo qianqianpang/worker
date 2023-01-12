@@ -64,8 +64,8 @@ def tf_idf():
     # 将tf-idf矩阵抽取出来，元素w[i][j]表示j词在i类文本中的tf-idf权重
     w = tfidf.toarray()
     weight = w.astype('float32')
-    # dataframe = pd.DataFrame({'weight': weight})
-    # dataframe.to_csv("weight.csv", index=False, sep=',')
+    dataframe = pd.DataFrame(weight)
+    dataframe.to_csv("result/weight.csv")
     return weight
 
 
