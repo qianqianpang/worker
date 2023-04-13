@@ -203,5 +203,5 @@ def run(filepath):
 
 
 if __name__ == '__main__':
-    run("testcase/testcase1.xlsx")
+    run("testcase/testcase1.xls")
     print("yes")

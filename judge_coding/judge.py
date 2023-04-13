@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import os
 import shutil
 from pathlib import Path
-import interview as iw
+import meeting_summary as iw
 import json
 import re
 import traceback
@@ -9,10 +10,10 @@ import traceback
 
 def compare_dataJson(i):#i:第几个testcase
     result = {}
-    f = open('answer/bz_data' + str(i) + '.json', encoding="utf-8")
+    f = open('answer/bz_data' + str(i) + '.json',encoding='UTF-8')
     bz_dataJson = json.load(f)
     f.close()
-    f = open('interview_result/data' + str(i) + '.json', encoding="utf-8")
+    f = open('interview_result/data' + str(i) + '.json')
     dataJson = json.load(f)
     f.close()
     key_list = ["主题", "日期", "开始时间", "结束时间", "地点", "主持人", "记录人", "应出席人数", "实际出席人数","缺席人数", "出席率"]
@@ -57,7 +58,7 @@ def compare_summary(i):
     txt = open('answer/bz_summary' + str(i) + '.txt', encoding="utf-8")
     bz_summary = txt.read().replace("\n", " ")
     txt.close()
-    txt = open('interview_result/summary' + str(i) + '.txt', encoding="utf-8")
+    txt = open('interview_result/summary' + str(i) + '.txt')
     summary = txt.read().replace("\n", " ")
     txt.close()
     txt = open('answer/bz_data' + str(i) + '.json', encoding="utf-8")
@@ -97,7 +98,7 @@ def compare_summary(i):
 
     # 比较迟到早退的人员名单
     bz_late_info = re.findall(r"请会后将会议全程录屏抄送给他们： (.+?)  签到表上部分同事未来得及签名", bz_summary)[0]
-    late_info = re.findall(r"请会后将会议全程录屏抄送给他们： (.+) ", summary)[0]
+    late_info = re.findall(r"请会后将会议全程录屏抄送给他们(.+) ", summary)[0]
     if "(" in late_info:  # 排除括号的错误
         bz_late_info = bz_late_info.replace("（", "(")
         bz_late_info = bz_late_info.replace("）", ")")
@@ -112,7 +113,7 @@ def compare_summary(i):
 
     # 比较未签到的人员名单
     bz_buqian_info = str(re.findall(r"未签到同事：(.+)", bz_summary))
-    buqian_info = str(re.findall(r"未签到同事：(.+)", summary))
+    buqian_info = str(re.findall(r"未签到同事(.+)", summary))
     if bz_buqian_info == "[]":
         if buqian_info != "[]":
             result["未签到的人员名单"] = {"answer": "", 'result': "非空"}
@@ -129,9 +130,9 @@ def compare_summary(i):
 
 
 def saveAs_json(path1, path2):
-    with open(path1, 'r', encoding='utf-8') as load_f:
+    with open(path1, 'r') as load_f:
         load_dict = json.load(load_f)
-    with open(path2, 'w', encoding='utf-8') as f:
+    with open(path2, 'w') as f:
         json.dump(load_dict, f, ensure_ascii=False)
     os.remove(path1)
 
